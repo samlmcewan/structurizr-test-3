@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: structurizr-test-3
+  namespace: structurizr-ns-test-3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: structurizr-test-3
+  template:
+    metadata:
+      labels:
+        app: structurizr-test-3
+    spec:
+      containers:
+        - name: structurizr-test-3
+          image: structurizr/onpremises:latest
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: structurizr-test-3
+  namespace: structurizr-ns-test-3
+spec:
+  selector:
+    app: structurizr-test-3
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
